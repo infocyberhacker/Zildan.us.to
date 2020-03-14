@@ -1,0 +1,59 @@
+@import "compass/css3";
+
+$bodybg: #021121;
+$circle-qty: 72;
+
+body {
+  background: $bodybg;
+}
+
+.scene {
+  width: 600px;
+  height: 250px;
+  margin: 18em auto;
+  perspective: 600px;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(0) translateZ(0);
+}
+
+.tunnel {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  animation: spin 9s infinite linear;
+}
+
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px;
+  border-style: dashed;
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  color: #8df435;
+  transform: translateY(-200px);
+  -webkit-filter: blur(1.0125px);
+}
+
+@for $i from 1 through $circle-qty {
+  .ring:nth-child(#{$i}) {
+    color: hsl($hue: $i * 5, $saturation: 100%, $lightness: 50%);
+    transform: rotateX($i * 5deg) translateY(-200px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
